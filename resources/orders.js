@@ -62,14 +62,12 @@ class Orders {
    * @param {string} organizer - The organizer's slug.
    * @param {string} event - The event's slug.
    * @param {Object} data - The order data.
-   * @param {Object} [params={}] - The query parameters.
    * @returns {Promise<Object>} - The created order data.
    */
-  async create(organizer, event, data, params = {}) {
+  async create(organizer, event, data) {
     return this.client.post(
       `organizers/${organizer}/events/${event}/orders/`,
-      data,
-      params
+      data
     );
   }
 
