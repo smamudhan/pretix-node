@@ -1,4 +1,4 @@
-const HttpClient = require('../helpers/httpClient');
+const HttpClient = require("../helpers/httpClient");
 
 /**
  * Customers class to interact with the Pretix Customers API.
@@ -14,10 +14,11 @@ class Customers {
 
   /**
    * Get all customers.
+   * @param {Object} [params={}] - The query parameters.
    * @returns {Promise<Object>} - The customers data.
    */
-  async getAll() {
-    return this.client.get('customers/');
+  async getAll(params = {}) {
+    return this.client.get("customers/", params);
   }
 
   /**
@@ -35,7 +36,7 @@ class Customers {
    * @returns {Promise<Object>} - The created customer data.
    */
   async create(data) {
-    return this.client.post('customers/', data);
+    return this.client.post("customers/", data);
   }
 
   /**

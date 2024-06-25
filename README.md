@@ -32,8 +32,8 @@ pretix.customers
 
 ### Customers
 
-- `getAll()`: Get all customers.
-- `get(id)`: Get a specific customer by ID.
+- `getAll(params)`: Get all customers.
+- `get(id, params)`: Get a specific customer by ID.
 - `create(data)`: Create a new customer.
 - `update(id, data)`: Update an existing customer.
 - `delete(id)`: Delete a customer.
@@ -41,27 +41,29 @@ pretix.customers
 ### Events
 
 - `getAll(organizer)`: Get all events for an organizer.
-- `get(organizer, event)`: Get a specific event.
+- `get(organizer, event, params)`: Get a specific event.
 - `create(organizer, data)`: Create a new event.
 - `update(organizer, event, data)`: Update an existing event.
 - `delete(organizer, event)`: Delete an event.
 
 ### Items
 
-- `getAll(organizer, event)`: Get all items for an event.
-- `get(organizer, event, item)`: Get a specific item.
+- `getAll(organizer, event, params)`: Get all items for an event.
+- `get(organizer, event, item, params)`: Get a specific item.
 - `create(organizer, event, data)`: Create a new item.
 - `update(organizer, event, item, data)`: Update an existing item.
 - `delete(organizer, event, item)`: Delete an item.
 
 ### Orders
 
-- `getAll(organizer, event)`: Get all orders for an event.
-- `get(organizer, event, code)`: Get a specific order.
+- `getAll(organizer, event, params)`: Get all orders for an event.
+- `get(organizer, event, code, params)`: Get a specific order.
+- `getTIckets(organizer, event, code, output)`: Download tickets for a specific order
 - `create(organizer, event, data)`: Create a new order.
 - `update(organizer, event, code, data)`: Update an existing order.
 - `delete(organizer, event, code)`: Delete an order.
-- `getTickets(organizer, event, order)`: Get tickets for an order.
+- `getTickets(organizer, event, order, params)`: Get tickets for an order.
+- `markAsPaid(organizer, event, code)`: Mark an order as paid.
 
 ## Contributing
 

@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require("axios");
 
 /**
  * HttpClient class to handle HTTP requests.
@@ -14,27 +14,29 @@ class HttpClient {
       baseURL: baseUrl,
       headers: {
         Authorization: `Token ${apiToken}`
-      }
+      },
     });
   }
 
   /**
    * Helper method for GET requests.
    * @param {string} endpoint - The API endpoint.
+   * @param {Object} [params={}] - The query parameters.
    * @returns {Promise<Object>} - The response data.
    */
-  async get(endpoint) {
-    return this.client.get(endpoint);
+  async get(endpoint, params = {}) {
+    return this.client.get(endpoint, { params });
   }
 
   /**
    * Helper method for POST requests.
    * @param {string} endpoint - The API endpoint.
    * @param {Object} data - The data to send in the request body.
+   * @param {Object} [params={}] - The query parameters.
    * @returns {Promise<Object>} - The response data.
    */
-  async post(endpoint, data) {
-    return this.client.post(endpoint, data);
+  async post(endpoint, data, params = {}) {
+    return this.client.post(endpoint, data, { params });
   }
 
   /**
