@@ -1,3 +1,5 @@
+[![NPM](https://nodei.co/npm/pretix-node.png?mini=true)](https://nodei.co/npm/pretix-node/)
+
 # Pretix Node Wrapper
 
 A Node Wrapper for the Pretix REST API.
