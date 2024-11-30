@@ -1,4 +1,5 @@
 const HttpClient = require("../helpers/httpClient");
+const Items = require("./items");
 
 /**
  * Events class to interact with the Pretix Events API.
@@ -10,6 +11,7 @@ class Events {
    */
   constructor(client) {
     this.client = client;
+    this.items = new Items(client);
   }
 
   /**
@@ -79,6 +81,28 @@ class Events {
    */
   async delete(organizer, event) {
     return this.client.delete(`organizers/${organizer}/events/${event}/`);
+  }
+
+  /**
+   * Get all events with their corresponding items.
+   * @param {string} organizer - The organizer's slug.
+   * @returns {Promise<Object>} - The events data with items.
+   */
+  async getEventsWithItems(organizer, params = {}) {
+    const eventsResponse = await this.getAll(organizer, params);
+    const events = eventsResponse.data.results;
+
+    // console.log(events);
+
+    const eventsWithItems = await Promise.all(
+      events.map(async (event) => {
+        const itemsResponse = await this.items.getAll(organizer, event.slug);
+        event.items = itemsResponse.data.results;
+        return event;
+      })
+    );
+
+    return { data: eventsWithItems };
   }
 }
 
