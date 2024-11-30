@@ -11,7 +11,7 @@ class Events {
    */
   constructor(client) {
     this.client = client;
-    this.items = new Items(client);
+    this.items = new Items(this.client);
   }
 
   /**
@@ -91,8 +91,6 @@ class Events {
   async getEventsWithItems(organizer, params = {}) {
     const eventsResponse = await this.getAll(organizer, params);
     const events = eventsResponse.data.results;
-
-    // console.log(events);
 
     const eventsWithItems = await Promise.all(
       events.map(async (event) => {

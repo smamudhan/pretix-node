@@ -1,6 +1,6 @@
 {
   "name": "pretix-node",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Node Wrapper for Pretix REST API",
   "main": "index.js",
   "scripts": {
