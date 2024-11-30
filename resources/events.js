@@ -86,15 +86,16 @@ class Events {
   /**
    * Get all events with their corresponding items.
    * @param {string} organizer - The organizer's slug.
+   * @param {Object} [eventsParams={}] - The query parameters for events.getAll
+   * @param {Object} [itemsParams={}] - The query parameters for items.getAll
    * @returns {Promise<Object>} - The events data with items.
    */
-  async getEventsWithItems(organizer, params = {}) {
-    const eventsResponse = await this.getAll(organizer, params);
+  async getEventsWithItems(organizer, eventsParams = {}, itemsParams = {}) {
+    const eventsResponse = await this.getAll(organizer, eventsParams);
     const events = eventsResponse.data.results;
-
     const eventsWithItems = await Promise.all(
       events.map(async (event) => {
-        const itemsResponse = await this.items.getAll(organizer, event.slug);
+        const itemsResponse = await this.items.getAll(organizer, event.slug, itemsParams);
         event.items = itemsResponse.data.results;
         return event;
       })
@@ -102,6 +103,17 @@ class Events {
 
     return { data: eventsWithItems };
   }
+
+  /**
+   * Get all settings for an event.
+   * @param {string} organizer - The organizer's slug.
+   * @param {string} event - The event's slug.
+   * @returns {Promise<Object>} - The event's current settings values.
+   */
+  async getSettings(organizer, event) {
+    return this.client.get(`organizers/${organizer}/events/${event}/settings/`);
+  }
+
 }
 
 module.exports = Events;
